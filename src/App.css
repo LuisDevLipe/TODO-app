@@ -1,0 +1,109 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root {
+  --primary-color:#0D1B2A;
+  --secunday-color:#778DA9;
+  --highlight-1:#415A77;
+  --highlight-2:#415A77;
+  --text-color:#E0E1DD;
+  --alt-color:#1B263B;
+}
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  border: none;
+ }
+ body {
+  background-color:var(--primary-color);
+  max-height: 100svhd;
+ }
+ main.app {
+  font-family: 'Barlow', sans-serif;
+  width:600px;
+  max-height: 100%;
+  aspect-ratio: 4/5;
+
+  margin:2rem auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  padding: 1.5rem;
+
+  background-color: var(--secunday-color);
+  border-radius: 1rem;
+  > header {
+    h1 {
+      font-size: 7rem;
+    }
+  }
+
+  > form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+
+    margin-top: 1rem;
+    
+    > textarea{
+      appearance: none;
+  
+      resize: none;
+      scrollbar-width: none;
+      flex-grow: 1;
+      padding: 1rem;
+      height: 7rem;
+      width: 100%;
+
+      font-size: 1.2rem;
+      line-height: 1.8rem;
+
+      border-radius: 0.5rem;
+    }
+    > input[type="submit"]{
+      padding: 1rem;
+      height: fit-content;
+      width: 100%;
+      border-radius: 0.5rem;
+
+      background-color: var(--primary-color);
+      color: var(--text-color);
+
+      /* font-weight: bold; */
+      font-size: 1.5rem;
+      font-family: "Barlow Condensed";
+      cursor: pointer;
+      box-shadow: 0 2px 4px black;
+      border: 1px solid var(--highlight-1);
+    }
+  }
+
+  > section {
+display: flex;
+flex-direction: column;
+gap: 1rem;
+overflow-y:  scroll;
+max-height: 100%;
+scrollbar-width: none;
+    > article {
+      width: 100%;
+      border: 1px solid var(--highlight-1);
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      background-color: var(--alt-color);
+      color: var(--text-color);
+
+      > pre {
+        font-size: 1.2rem;
+      }
+    }
+
+
+  }
+
+
+ }
