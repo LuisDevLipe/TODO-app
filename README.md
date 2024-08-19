@@ -1,50 +1,31 @@
-# React + TypeScript + Vite
+# TODO app
+This is essentially my first typescript project, since i've started leraning typescript and wanted to try ir out on a actual project.
+This Project is a simple TODO web app.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+it runs on vite + react w/typescrit
+everything is handled locally on the client-side.
 
-Currently, two official plugins are available:
+The web app implements all 4 CRUD operations.
+  
+- [x] Create
+- [x] Read
+- [ ] Update
+- [x] Delete
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## packages / dependencies
+- Lucide-react
+- - Lucide is a simple icon library.
+- LocalForage
+- - LocalForage is used here so the web app can save the user TODO's on the client side of things. AKA web browser.
+ 
 
-## Expanding the ESLint configuration
+# Resume of my experience.
+Overall i'm pretty happy with how things are coming together. I realized typescript wasn't so difficult has i tought i would.
+However, i did decide to keep typing as simple as possible and tried not to make a shitty codebase, whilst my brain felt i shouldn't try to use typescript features that i don't understand yet.
+** i know nothing about the <htmlEventHandler<HtmlButtonElement>> react wanted me to use, but i had to used it anyway but again i'm still learning so theres that.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+# I really wish if someone eventually see's this, that they can hint me to something i did wrong, or maybe shed me some light on best practices. I would also likes to hear if anyone has a feature that i could try to implement.
+when i finish de ```
+update``` i will try to getting online either on render.com , vercel or some other place maybe like firebase or microsoft appspaces.
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+However if you do want to test it locally right now, since its just a react codebase you clone the repository and run the following command inside this directory ```npm i && npm run dev```
