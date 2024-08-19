@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 :root {
   --primary-color:#0D1B2A;
-  --secunday-color:#778DA9;
+  --secondary-color:#778DA9;
   --highlight-1:#415A77;
   --highlight-2:#415A77;
   --text-color:#E0E1DD;
@@ -14,29 +14,38 @@
   box-sizing: border-box;
   border: none;
  }
- body {
-  background-color:var(--primary-color);
-  max-height: 100svhd;
+ body{
+   height: 100svh;
+   
+   & div#root {
+     
+     background-color:var(--primary-color);
+    height: 100%;
+     padding: 2rem 0;
+  }
  }
  main.app {
   font-family: 'Barlow', sans-serif;
-  width:600px;
-  max-height: 100%;
   aspect-ratio: 4/5;
+  width:650px;
+  height: fit-content; 
+  max-height: 160%;
 
-  margin:2rem auto;
+  margin:0 auto;
 
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 2rem;
 
   padding: 1.5rem;
 
-  background-color: var(--secunday-color);
+  background-color: var(--secondary-color);
   border-radius: 1rem;
   > header {
+
     h1 {
       font-size: 7rem;
+      line-height: 7rem;
     }
   }
 
@@ -44,10 +53,10 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     align-items: center;
 
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     
     > textarea{
       appearance: none;
@@ -80,26 +89,156 @@
       box-shadow: 0 2px 4px black;
       border: 1px solid var(--highlight-1);
     }
-  }
+    >input[type="submit"]:is(:hover,:focus){
+      background-color: var(--alt-color);
+    }  }
 
   > section {
 display: flex;
 flex-direction: column;
 gap: 1rem;
-overflow-y:  scroll;
-max-height: 100%;
-scrollbar-width: none;
+overflow-y:  auto;
+scrollbar-color: var(--primary-color) transparent;
+/* scrollbar-gutter:; */
+/* height: 100%; */
+
+
     > article {
       width: 100%;
       border: 1px solid var(--highlight-1);
-      padding: 1.5rem;
       border-radius: 0.5rem;
       background-color: var(--alt-color);
-      color: var(--text-color);
+      min-height: 8rem; 
+      /* Tamanho minimo do article
+      botoes = 1.5rem 
+      + paddingtop = 0.75rem*2 
+      + gap = 0.5rem
+      + 0.25rem padding top do article
+      + line-height = 1.5rem * 3 (3 linhas de texto por padrao)
+      total minimo =  8rem
+      */
+      max-height: 11.5rem;
+      /* Tamanho maximo do article
+        o mesmo do minimo mas 
+        com a quantidade de line height a mais necessesaria
+      */
 
+      height: fit-content;
+      
+      
+      
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      flex-direction: column-reverse;
       > pre {
+        font-family: "Barlow", "monospace","arial";
         font-size: 1.2rem;
+        line-height: 1.5rem;
+        flex-grow: 1;
+        white-space:pre-line;
+        word-wrap: break-word;
+        overflow-wrap:ellipsis;
+        
+        color: var(--text-color);
+
+        overflow-x: clip;
+        overflow-y:auto ;
+        scrollbar-gutter: stable;
+        scrollbar-color: var(--secondary-color) transparent;
+
+        scroll-behavior: smooth;
       }
+
+      >span {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+     > span {
+      display: flex;
+      align-items: center;
+       >p {
+         color: var(--secondary-color);
+         
+         font-size: 0.8rem;
+         font-family: "Barlow Condensed";
+         font-weight: bold;
+         
+         padding: 0 0.5rem;
+        }
+     
+        >span.status {
+          user-select: none;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+
+          label {
+
+            color: var(--text-color);
+          }
+
+          span.checkbox {
+            position: relative;
+            background-color:var(--highlight-1);
+            outline:var(--highlight-1) solid 1px;
+            outline-offset: 0.125rem;
+            border-radius : 100%;
+            width: 1.5rem;
+            height: 1.5rem;
+
+            > input{
+              position: absolute;
+              height: 1.5rem;
+              width: 1.5rem;
+              opacity: 0;
+              cursor: pointer;
+              z-index: 999;
+            }
+
+            svg.checkmark {
+              position: absolute;
+              color: #00ff00;
+              stroke-width:1.5 ;
+              width: 1rem;
+              height: 1rem;
+              transform: translate(-50%,-50%);
+              top: 50%;
+              left: 50%;
+            }
+          }
+        }
+
+      }
+        
+      > span {
+        /* flex-shrink: 1;
+        flex-basis: 0%;
+        display: block; */
+        width: fit-content;
+        align-self: end;
+        display: flex;
+        gap: 0.5rem;
+        padding: 0 0.5rem;
+
+        
+
+        > button {
+
+          background-color: transparent;
+          cursor: pointer;
+
+          color: var(--secondary-color);
+          >svg {
+            color: inherit;
+            stroke-width: 1.5;
+          }
+        }
+        >button:hover, button:focus {
+          color:var(--highlight-1) ;
+        }
+      }
+    }
     }
 
 

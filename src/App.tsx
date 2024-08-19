@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { Pencil, Trash } from "lucide-react";
+import { CheckCheck, Pencil, Trash } from "lucide-react";
 import localforage from "localforage";
 
 interface TODOinterface {
 	id: number;
 	TODOCONTENT: string;
+	isCompleted:boolean;
 }
 function App() {
 	const [TODOCONTENT, setTODOCONTENT] = useState<string>("");
@@ -13,7 +14,8 @@ function App() {
 
 	function createTODO(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-		const TODO = { id: TODOS.length + 1, TODOCONTENT };
+		// if (TODOCONTENT == "") return
+		const TODO = { id: TODOS.length + 1, TODOCONTENT,isCompleted:false };
 		setTODOS([...TODOS, TODO]);
 		setTODOCONTENT("");
 
@@ -32,6 +34,10 @@ function App() {
 
 	function editTODO() {
 		return;
+	}
+
+	function checkAsCompletedTODO() {
+		
 	}
 
 	useEffect(() => {
@@ -63,7 +69,15 @@ function App() {
 
 				<section>
 					{TODOS.map((TODO) => {
-						return <NewTodo key={TODO.id} TODO={TODO} deleteTODO={deleteTODO} editTODO={editTODO} />;
+						return (
+							<NewTodo
+								key={TODO.id}
+								TODO={TODO}
+								TODOS_length={TODOS.length}
+								deleteTODO={deleteTODO}
+								editTODO={editTODO}
+							/>
+						);
 					})}
 				</section>
 			</main>
@@ -73,24 +87,39 @@ function App() {
 
 interface TODOComponentPropsinterface {
 	TODO: TODOinterface;
+	TODOS_length: number;
 	deleteTODO: (TODOid: TODOinterface["id"]) => void;
 	editTODO: (editedTODO: TODOinterface) => void;
 }
 
-function NewTodo({ TODO, deleteTODO, editTODO }: TODOComponentPropsinterface) {
+function NewTodo({ TODO, deleteTODO, editTODO, TODOS_length }: TODOComponentPropsinterface) {
 	return (
 		<article key={TODO.id}>
-			<pre>
-				<span>{TODO.id}</span>
-				{TODO.TODOCONTENT}
-			</pre>
+			<pre>{TODO.TODOCONTENT}</pre>
 			<span>
-				<button className="delete" onClick={() => deleteTODO(TODO.id)}>
-					<Trash />
-				</button>
-				<button className="delete">
-					<Pencil />
-				</button>
+				<span>
+					<p>
+						{TODO.id} / {TODOS_length}
+					</p>
+					<span className="status">
+						<span className="checkbox">
+							<input type="checkbox" name="status" checked />
+							{
+
+							}
+							<CheckCheck className="checkmark" />
+						</span>
+						<label htmlFor="status">should change auto</label>
+					</span>
+				</span>
+				<span>
+					<button className="delete" onClick={() => deleteTODO(TODO.id)}>
+						<Trash />
+					</button>
+					<button className="delete">
+						<Pencil />
+					</button>
+				</span>
 			</span>
 		</article>
 	);
