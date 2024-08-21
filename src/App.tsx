@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
-import { CheckCheck, Pencil, Trash } from "lucide-react";
+import { CheckCheck, CircleDashed, Pencil, Trash } from "lucide-react";
 import localforage from "localforage";
 
 interface TODOinterface {
 	id: number;
 	TODOCONTENT: string;
-	isCompleted:boolean;
+	isCompleted: boolean;
 }
 function App() {
 	const [TODOCONTENT, setTODOCONTENT] = useState<string>("");
@@ -15,7 +15,7 @@ function App() {
 	function createTODO(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		// if (TODOCONTENT == "") return
-		const TODO = { id: TODOS.length + 1, TODOCONTENT,isCompleted:false };
+		const TODO = { id: TODOS.length + 1, TODOCONTENT, isCompleted: false };
 		setTODOS([...TODOS, TODO]);
 		setTODOCONTENT("");
 
@@ -36,8 +36,14 @@ function App() {
 		return;
 	}
 
-	function checkAsCompletedTODO() {
-		
+	function changeCompletionState(TODOid: TODOinterface["id"], _isCompleted: TODOinterface["isCompleted"]) {
+		// console.log(TODOid, _isCompleted);
+
+		setTODOS([...TODOS.map((TODO) => (TODO.id === TODOid ? { ...TODO, isCompleted: !_isCompleted } : TODO))]);
+		localforage.setItem(TODOid.toString(), {
+			...TODOS.find((TODO) => TODO.id === TODOid),
+			isCompleted: !_isCompleted,
+		});
 	}
 
 	useEffect(() => {
@@ -76,6 +82,7 @@ function App() {
 								TODOS_length={TODOS.length}
 								deleteTODO={deleteTODO}
 								editTODO={editTODO}
+								changeCompletionState={changeCompletionState}
 							/>
 						);
 					})}
@@ -90,9 +97,10 @@ interface TODOComponentPropsinterface {
 	TODOS_length: number;
 	deleteTODO: (TODOid: TODOinterface["id"]) => void;
 	editTODO: (editedTODO: TODOinterface) => void;
+	changeCompletionState: (TODOid: TODOinterface["id"], _isCompleted: TODOinterface["isCompleted"]) => void;
 }
 
-function NewTodo({ TODO, deleteTODO, editTODO, TODOS_length }: TODOComponentPropsinterface) {
+function NewTodo({ TODO, deleteTODO, editTODO, changeCompletionState, TODOS_length }: TODOComponentPropsinterface) {
 	return (
 		<article key={TODO.id}>
 			<pre>{TODO.TODOCONTENT}</pre>
@@ -103,13 +111,19 @@ function NewTodo({ TODO, deleteTODO, editTODO, TODOS_length }: TODOComponentProp
 					</p>
 					<span className="status">
 						<span className="checkbox">
-							<input type="checkbox" name="status" checked />
-							{
+							<input
+								type="button"
+								name="status"
+								onClick={() => changeCompletionState(TODO.id, TODO.isCompleted)}
+							/>
 
-							}
-							<CheckCheck className="checkmark" />
+							{TODO.isCompleted ? (
+								<CheckCheck className="checkmark" />
+							) : (
+								<CircleDashed className="checkmark pending" />
+							)}
 						</span>
-						<label htmlFor="status">should change auto</label>
+						<label htmlFor="status">{TODO.isCompleted ? "Task Completed" : "Task Pending"}</label>
 					</span>
 				</span>
 				<span>

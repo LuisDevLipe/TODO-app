@@ -15,7 +15,7 @@
   border: none;
  }
  body{
-   height: 100svh;
+   min-height: 100svh;
    
    & div#root {
      
@@ -174,8 +174,9 @@ scrollbar-color: var(--primary-color) transparent;
           gap: 0.5rem;
 
           label {
-
+            opacity: 0;
             color: var(--text-color);
+            transition: all 0.2s ease-in-out;
           }
 
           span.checkbox {
@@ -205,6 +206,9 @@ scrollbar-color: var(--primary-color) transparent;
               transform: translate(-50%,-50%);
               top: 50%;
               left: 50%;
+            }
+            svg.checkmark.pending {
+              color: #ffff00;
             }
           }
         }
@@ -239,6 +243,14 @@ scrollbar-color: var(--primary-color) transparent;
         }
       }
     }
+    }
+
+    > article:hover, article:focus{
+    
+        label {
+          opacity: 1 !important;
+          color: var(--text-color);
+        }
     }
 
 
