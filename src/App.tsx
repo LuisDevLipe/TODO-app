@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { CheckCheck, CircleDashed, Pencil, Trash } from "lucide-react";
 import localforage from "localforage";
+import { createPortal } from "react-dom";
 
 interface TODOinterface {
 	id: number;
@@ -14,6 +15,8 @@ function App() {
 
 	function createTODO(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
+
+		// console.log(e.target["todo"].value);
 		// if (TODOCONTENT == "") return
 		const TODO = { id: TODOS.length + 1, TODOCONTENT, isCompleted: false };
 		setTODOS([...TODOS, TODO]);
@@ -32,8 +35,9 @@ function App() {
 		localforage.removeItem(TODOid.toString()).catch(console.error);
 	}
 
-	function editTODO() {
-		return;
+	function editTODO(event: React.FormEvent<HTMLFormElement>) {
+		event.preventDefault();
+		console.log(event.target);
 	}
 
 	function changeCompletionState(TODOid: TODOinterface["id"], _isCompleted: TODOinterface["isCompleted"]) {
@@ -96,11 +100,12 @@ interface TODOComponentPropsinterface {
 	TODO: TODOinterface;
 	TODOS_length: number;
 	deleteTODO: (TODOid: TODOinterface["id"]) => void;
-	editTODO: (editedTODO: TODOinterface) => void;
+	editTODO: (event: React.FormEvent<HTMLFormElement>) => void;
 	changeCompletionState: (TODOid: TODOinterface["id"], _isCompleted: TODOinterface["isCompleted"]) => void;
 }
 
 function NewTodo({ TODO, deleteTODO, editTODO, changeCompletionState, TODOS_length }: TODOComponentPropsinterface) {
+	const [OpenEditModal, setOpenEditModal] = useState<boolean>(false);
 	return (
 		<article key={TODO.id}>
 			<pre>{TODO.TODOCONTENT}</pre>
@@ -130,13 +135,38 @@ function NewTodo({ TODO, deleteTODO, editTODO, changeCompletionState, TODOS_leng
 					<button className="delete" onClick={() => deleteTODO(TODO.id)}>
 						<Trash />
 					</button>
-					<button className="delete">
+					<button className="edit" onClick={() => setOpenEditModal(true)}>
 						<Pencil />
 					</button>
 				</span>
 			</span>
+			{OpenEditModal ? createPortal(<EditTodoModal />, document.body) : null}
 		</article>
 	);
+
+	function EditTodoModal({}) {
+		console.log("renderizou");
+		return (
+			<div className="modal-backdrop">
+				<div className="overlay"></div>
+				<form
+					action="#"
+					onSubmit={(e) => {
+						editTODO(e);
+					}}
+				>
+					<span className="actions">
+						<button type="button">Cancelar</button>
+					</span>
+
+					<fieldset>
+						<textarea name="editTODO" id="editTODO"></textarea>
+						<input type="submit" value="Salvar Edição" />
+					</fieldset>
+				</form>
+			</div>
+		);
+	}
 }
 
 export default App;
