@@ -1,3 +1,4 @@
+https://todo-app-kappa-ten-58.vercel.app/
 # TODO app
 This is essentially my first typescript project, since i've started leraning typescript and wanted to try ir out on a actual project.
 This Project is a simple TODO web app.
