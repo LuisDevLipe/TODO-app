@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import "./App.css";
 import { CheckCheck, CircleDashed, Pencil, Trash } from "lucide-react";
 import localforage from "localforage";
@@ -19,35 +19,51 @@ function App() {
 		// console.log(e.target["todo"].value);
 		// if (TODOCONTENT == "") return
 		const TODO = { id: TODOS.length + 1, TODOCONTENT, isCompleted: false };
+		saveTODO(TODO);
 		setTODOS([...TODOS, TODO]);
 		setTODOCONTENT("");
-
-		saveTODO(TODO);
 	}
 
 	function saveTODO(TODO: TODOinterface) {
-		localforage.setItem<TODOinterface>(TODO.id.toString(), TODO);
+		localforage.setItem<TODOinterface>(TODO.id.toString(), TODO).catch((e) => {
+			throw new Error(e);
+		});
 	}
 
 	function deleteTODO(TODOid: TODOinterface["id"]) {
+		localforage.removeItem(TODOid.toString()).catch((e) => {
+			throw new Error(e);
+		});
 		setTODOS(TODOS.filter((TODO) => TODO.id !== TODOid));
-
-		localforage.removeItem(TODOid.toString()).catch(console.error);
 	}
 
-	function editTODO(event: React.FormEvent<HTMLFormElement>) {
+	function editTODO(event: React.FormEvent<HTMLFormElement>, TODO: TODOinterface) {
 		event.preventDefault();
-		console.log(event.target);
+
+		const TODOCONTENT = event.currentTarget["editTODO"].value;
+		localforage
+			.setItem(TODO.id.toString(), {
+				...TODOS.find((TODO) => TODO.id === TODO.id),
+				TODOCONTENT,
+			})
+			.catch((e) => {
+				throw new Error(e);
+			});
+		setTODOS([...TODOS.map((_TODO) => (_TODO.id === TODO.id ? { ..._TODO, TODOCONTENT } : _TODO))]);
 	}
 
 	function changeCompletionState(TODOid: TODOinterface["id"], _isCompleted: TODOinterface["isCompleted"]) {
 		// console.log(TODOid, _isCompleted);
 
+		localforage
+			.setItem(TODOid.toString(), {
+				...TODOS.find((TODO) => TODO.id === TODOid),
+				isCompleted: !_isCompleted,
+			})
+			.catch((e) => {
+				throw new Error(e);
+			});
 		setTODOS([...TODOS.map((TODO) => (TODO.id === TODOid ? { ...TODO, isCompleted: !_isCompleted } : TODO))]);
-		localforage.setItem(TODOid.toString(), {
-			...TODOS.find((TODO) => TODO.id === TODOid),
-			isCompleted: !_isCompleted,
-		});
 	}
 
 	useEffect(() => {
@@ -57,7 +73,9 @@ function App() {
 				TODOS_from_DB.push(TODO);
 			})
 			.then(() => setTODOS(TODOS_from_DB))
-			.catch(console.error);
+			.catch((e) => {
+				throw new Error(e);
+			});
 	}, []);
 
 	return (
@@ -84,8 +102,8 @@ function App() {
 								key={TODO.id}
 								TODO={TODO}
 								TODOS_length={TODOS.length}
-								deleteTODO={deleteTODO}
 								editTODO={editTODO}
+								deleteTODO={deleteTODO}
 								changeCompletionState={changeCompletionState}
 							/>
 						);
@@ -100,12 +118,13 @@ interface TODOComponentPropsinterface {
 	TODO: TODOinterface;
 	TODOS_length: number;
 	deleteTODO: (TODOid: TODOinterface["id"]) => void;
-	editTODO: (event: React.FormEvent<HTMLFormElement>) => void;
+	editTODO: (event: React.FormEvent<HTMLFormElement>, TODO: TODOinterface) => void;
 	changeCompletionState: (TODOid: TODOinterface["id"], _isCompleted: TODOinterface["isCompleted"]) => void;
 }
 
 function NewTodo({ TODO, deleteTODO, editTODO, changeCompletionState, TODOS_length }: TODOComponentPropsinterface) {
 	const [OpenEditModal, setOpenEditModal] = useState<boolean>(false);
+
 	return (
 		<article key={TODO.id}>
 			<pre>{TODO.TODOCONTENT}</pre>
@@ -140,27 +159,60 @@ function NewTodo({ TODO, deleteTODO, editTODO, changeCompletionState, TODOS_leng
 					</button>
 				</span>
 			</span>
-			{OpenEditModal ? createPortal(<EditTodoModal />, document.body) : null}
+			{OpenEditModal
+				? createPortal(
+						<EditTodoModal editTODO={editTODO} TODO={TODO} setOpenEditModal={setOpenEditModal} />,
+						document.body
+				  )
+				: null}
 		</article>
 	);
+	interface EditTodoModalPropsinterface {
+		TODO: TODOinterface;
+		editTODO: (event: React.FormEvent<HTMLFormElement>, TODO: TODOinterface) => void;
+		setOpenEditModal: Dispatch<SetStateAction<boolean>>;
+	}
 
-	function EditTodoModal({}) {
-		console.log("renderizou");
+	function EditTodoModal({ TODO, editTODO, setOpenEditModal }: EditTodoModalPropsinterface) {
+		const modalRef = useRef<HTMLDivElement>(null);
+		const [TODOCONTENT, setTODOCONTENT] = useState<string>(TODO.TODOCONTENT);
+
+		useEffect(() => {
+			modalRef.current?.focus();
+		}, []);
 		return (
-			<div className="modal-backdrop">
-				<div className="overlay"></div>
+			<div
+				tabIndex={1}
+				ref={modalRef}
+				className="modal-backdrop"
+				onKeyDown={(e) => {
+					if (e.key === "Escape") {
+						console.log("escape");
+						setOpenEditModal(false);
+					}
+				}}
+			>
+				<div className="overlay" onClick={() => setOpenEditModal(false)}></div>
 				<form
 					action="#"
 					onSubmit={(e) => {
-						editTODO(e);
+						editTODO(e, TODO);
+						setOpenEditModal(false);
 					}}
 				>
 					<span className="actions">
-						<button type="button">Cancelar</button>
+						<button type="button" onClick={() => setOpenEditModal(false)}>
+							Cancelar
+						</button>
 					</span>
 
 					<fieldset>
-						<textarea name="editTODO" id="editTODO"></textarea>
+						<textarea
+							name="editTODO"
+							id="editTODO"
+							value={TODOCONTENT}
+							onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setTODOCONTENT(e.target.value)}
+						></textarea>
 						<input type="submit" value="Salvar Edição" />
 					</fieldset>
 				</form>

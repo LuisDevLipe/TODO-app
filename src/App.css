@@ -269,6 +269,8 @@ scrollbar-color: var(--primary-color) transparent;
   width: 100%; */
 
 
+
+
   
   > div.overlay {
     position: absolute;
@@ -309,6 +311,7 @@ scrollbar-color: var(--primary-color) transparent;
         /* font-size: 1rem; */
         font-weight: bold;
         text-transform: uppercase;
+        transition: all 0.16s ease-in;
       }
 
       button:hover,button:focus{
@@ -331,13 +334,21 @@ scrollbar-color: var(--primary-color) transparent;
 
         background-color: var(--secondary-color);
 
-        /* color: var(--text-color); */
-
-
       }
       input[type="submit"] {
+        cursor: pointer;
         border-radius: 0.5rem;
         padding: 0.75rem;
+
+        background-color: var(--highlight-1);
+        color: var(--text-color);
+        font-size: 1.25rem;
+        font-family: "Barlow Condensed";
+        transition: all 0.16s ease-in;
+      }
+
+      input[type="submit"]:hover,input[type="submit"]:focus{
+        background-color: var(--alt-color);
       }
     }
 
