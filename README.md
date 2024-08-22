@@ -10,7 +10,7 @@ The web app implements all 4 CRUD operations.
   
 - [x] Create
 - [x] Read
-- [ ] Update
+- [x] Update
 - [x] Delete
 
 ## packages / dependencies
