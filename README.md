@@ -23,11 +23,15 @@ The web app implements all 4 CRUD operations.
 
 # Resume of my experience.
 Overall i'm pretty happy with how things are coming together. I realized typescript wasn't so difficult has i tought it would.
-However, i did decide to keep typing as simple as possible and tried not to make a overcomplicated codebase, whilst also o felt i shouldn't try to use typescript features that i don't fully understand yet.
+However, i did decide to keep typing as simple as possible and tried not to make a overcomplicated codebase, whilst also i felt i shouldn't try to use typescript features that i didn't fully understand yet.
 ** i know nothing about the <htmlEventHandler<HtmlButtonElement>> react wanted me to use, but i had to used it anyway but again i'm still learning so theres that.
 
-# I really wish if someone eventually see's this, that they can hint me to something i did wrong, or maybe shed me some light on best practices. I would also likes to hear if anyone has a feature that i could try to implement.
-when i finish de ```
-update``` i will try to getting online either on render.com , vercel or some other place maybe like firebase or microsoft appspaces.
+# I really wish that if someone eventually see's this, that you can hint me to something i did wrong, or maybe shed me some light on best practices. I would also like to hear from you if you can think about a feature that i could try to implement.
 
-However if you do want to test it locally right now, since its just a react codebase you clone the repository and run the following command inside this directory ```npm i && npm run dev```
+
+The web app is hosted right now at vercel.
+
+However if you do want to test it locally, since its just a react codebase, you can clone the repository and run the following command inside the root directory ```npm i && npm run dev```
+and then follow the localhost url shown at the terminal window.
+
+I really appreciate if someone read this file... :D
