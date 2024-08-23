@@ -29,7 +29,7 @@
  main.app {
   font-family: 'Barlow', sans-serif;
   aspect-ratio: 4/5;
-  width:650px;
+  max-width:650px;
   height: fit-content; 
   max-height: 160%;
 
