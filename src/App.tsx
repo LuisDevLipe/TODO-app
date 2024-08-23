@@ -126,7 +126,7 @@ function NewTodo({ TODO, deleteTODO, editTODO, changeCompletionState, TODOS_leng
 	const [OpenEditModal, setOpenEditModal] = useState<boolean>(false);
 
 	return (
-		<article key={TODO.id}>
+		<article key={TODO.id} tabIndex={0}>
 			<pre>{TODO.TODOCONTENT}</pre>
 			<span>
 				<span>

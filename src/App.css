@@ -1,117 +1,123 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 :root {
-  --primary-color:#0D1B2A;
-  --secondary-color:#778DA9;
-  --highlight-1:#415A77;
-  --highlight-2:#415A77;
-  --text-color:#E0E1DD;
-  --alt-color:#1B263B;
+	--primary-color: #0d1b2a;
+	--secondary-color: #778da9;
+	--highlight-1: #415a77;
+	--highlight-2: #415a77;
+	--text-color: #e0e1dd;
+	--alt-color: #1b263b;
 }
-*{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  border: none;
- }
- body{
-   min-height: 100svh;
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	border: none;
+}
+body {
+	min-height: 100svh;
+  max-height: 100svh;
 
-   position: relative;
-   
-   & div#root {
-     
-     background-color:var(--primary-color);
-    height: 100%;
-     padding: 2rem 0;
-  }
- }
- main.app {
-  font-family: 'Barlow', sans-serif;
-  aspect-ratio: 4/5;
-  max-width:650px;
-  height: fit-content; 
-  max-height: 160%;
+	position: relative;
 
-  margin:0 auto;
-
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-
-  padding: 1.5rem;
-
-  background-color: var(--secondary-color);
-  border-radius: 1rem;
-  > header {
-
-    h1 {
-      font-size: 7rem;
-      line-height: 7rem;
-    }
-  }
-
-  > form {
-    width: 100%;
+	& div#root {
+		background-color: var(--primary-color);
+		min-height: 100svh;
+    max-height: 150svh;
+		padding: 2rem 0.5rem;
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
+	}
+}
+main.app {
+	font-family: "Barlow", sans-serif;
+	/* aspect-ratio: 4/5; */
+	max-width: 650px;
+  width: 100%;
+	min-height: 100%;
+	max-height: 150%;
 
-    margin-top: 0.5rem;
+	margin: 0 auto;
+
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+
+	padding: 1.5rem;
+
+	background-color: var(--secondary-color);
+	border-radius: 1rem;
+	> header {
+		h1 {
+			font-size: 7rem;
+			line-height: 7rem;
+		}
+	}
+
+	> form {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		align-items: center;
+
+		margin-top: 0.5rem;
+
+		> textarea {
+			appearance: none;
+
+			resize: none;
+			scrollbar-width: none;
+			flex-grow: 1;
+			padding: 1rem;
+			height: 7rem;
+			width: 100%;
+
+			font-size: 1.2rem;
+			line-height: 1.8rem;
+
+			border-radius: 0.5rem;
+		}
+		> input[type="submit"] {
+			padding: 1rem;
+			height: fit-content;
+			width: 100%;
+			border-radius: 0.5rem;
+
+			background-color: var(--primary-color);
+			color: var(--text-color);
+
+			/* font-weight: bold; */
+			font-size: 1.5rem;
+			font-family: "Barlow Condensed";
+			cursor: pointer;
+			box-shadow: 0 2px 4px black;
+			border: 1px solid var(--highlight-1);
+		}
+		> input[type="submit"]:is(:hover, :focus) {
+			background-color: var(--alt-color);
+		}
+	}
+
+	> section {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		overflow-y: auto;
+    overflow-x: visible;
+		scrollbar-color: var(--primary-color) transparent;
+		/* scrollbar-gutter:; */
+		/* height: 100%; */
+    /* padding: 0.5rem; */
+    /* overflow: visible; */
     
-    > textarea{
-      appearance: none;
-  
-      resize: none;
-      scrollbar-width: none;
-      flex-grow: 1;
-      padding: 1rem;
-      height: 7rem;
-      width: 100%;
+    /* max-height: 80vh; */
 
-      font-size: 1.2rem;
-      line-height: 1.8rem;
-
-      border-radius: 0.5rem;
-    }
-    > input[type="submit"]{
-      padding: 1rem;
-      height: fit-content;
-      width: 100%;
-      border-radius: 0.5rem;
-
-      background-color: var(--primary-color);
-      color: var(--text-color);
-
-      /* font-weight: bold; */
-      font-size: 1.5rem;
-      font-family: "Barlow Condensed";
-      cursor: pointer;
-      box-shadow: 0 2px 4px black;
-      border: 1px solid var(--highlight-1);
-    }
-    >input[type="submit"]:is(:hover,:focus){
-      background-color: var(--alt-color);
-    }  }
-
-  > section {
-display: flex;
-flex-direction: column;
-gap: 1rem;
-overflow-y:  auto;
-scrollbar-color: var(--primary-color) transparent;
-/* scrollbar-gutter:; */
-/* height: 100%; */
-
-
-    > article {
-      width: 100%;
-      border: 1px solid var(--highlight-1);
-      border-radius: 0.5rem;
-      background-color: var(--alt-color);
-      min-height: 8rem; 
-      /* Tamanho minimo do article
+		> article {
+			width: 100%;
+			border: 1px solid var(--highlight-1);
+			border-radius: 0.5rem;
+			background-color: var(--alt-color);
+			min-height: 8rem;
+			/* Tamanho minimo do article
       botoes = 1.5rem 
       + paddingtop = 0.75rem*2 
       + gap = 0.5rem
@@ -119,245 +125,249 @@ scrollbar-color: var(--primary-color) transparent;
       + line-height = 1.5rem * 3 (3 linhas de texto por padrao)
       total minimo =  8rem
       */
-      max-height: 11.5rem;
-      /* Tamanho maximo do article
+			max-height: 11.5rem;
+			/* Tamanho maximo do article
         o mesmo do minimo mas 
         com a quantidade de line height a mais necessesaria
       */
 
-      height: fit-content;
-      
-      
-      
-      display: flex;
-      gap: 0.5rem;
-      padding: 0.75rem;
-      flex-direction: column-reverse;
-      > pre {
-        font-family: "Barlow", "monospace","arial";
-        font-size: 1.2rem;
-        line-height: 1.5rem;
-        flex-grow: 1;
-        white-space:pre-line;
-        word-wrap: break-word;
-        overflow-wrap:ellipsis;
-        
-        color: var(--text-color);
+			height: fit-content;
 
-        overflow-x: clip;
-        overflow-y:auto ;
-        scrollbar-gutter: stable;
-        scrollbar-color: var(--secondary-color) transparent;
+			display: flex;
+			gap: 0.5rem;
+			padding: 0.75rem;
+			flex-direction: column-reverse;
 
-        scroll-behavior: smooth;
-      }
+      box-shadow: 2px 2px 4px black;
+			> pre {
+				font-family: "Barlow", "monospace", "arial";
+				font-size: 1.2rem;
+				line-height: 1.5rem;
+				flex-grow: 1;
+				white-space: pre-line;
+				word-wrap: break-word;
+				overflow-wrap: ellipsis;
 
-      >span {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-     > span {
-      display: flex;
-      align-items: center;
-       >p {
-         color: var(--secondary-color);
-         
-         font-size: 0.8rem;
-         font-family: "Barlow Condensed";
-         font-weight: bold;
-         
-         padding: 0 0.5rem;
-        }
-     
-        >span.status {
-          user-select: none;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
+				color: var(--text-color);
 
-          label {
-            opacity: 0;
-            color: var(--text-color);
-            transition: all 0.2s ease-in-out;
-          }
+				overflow-x: clip;
+				overflow-y: auto;
+				scrollbar-gutter: stable;
+				scrollbar-color: var(--secondary-color) transparent;
 
-          span.checkbox {
-            position: relative;
-            background-color:var(--highlight-1);
-            outline:var(--highlight-1) solid 1px;
-            outline-offset: 0.125rem;
-            border-radius : 100%;
-            width: 1.5rem;
-            height: 1.5rem;
+				scroll-behavior: smooth;
+			}
 
-            > input{
-              position: absolute;
-              height: 1.5rem;
-              width: 1.5rem;
-              opacity: 0;
-              cursor: pointer;
-              z-index: 999;
-            }
+			> span {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				> span {
+					display: flex;
+					align-items: center;
+					> p {
+						color: var(--secondary-color);
 
-            svg.checkmark {
-              position: absolute;
-              color: #00ff00;
-              stroke-width:1.5 ;
-              width: 1rem;
-              height: 1rem;
-              transform: translate(-50%,-50%);
-              top: 50%;
-              left: 50%;
-            }
-            svg.checkmark.pending {
-              color: #ffff00;
-            }
-          }
-        }
+						font-size: 0.8rem;
+						font-family: "Barlow Condensed";
+						font-weight: bold;
 
-      }
-        
-      > span {
-        /* flex-shrink: 1;
+						padding: 0 0.5rem;
+					}
+
+					> span.status {
+						user-select: none;
+						display: flex;
+						align-items: center;
+						gap: 0.5rem;
+
+						label {
+							opacity: 0;
+							color: var(--text-color);
+							transition: all 0.2s ease-in-out;
+						}
+
+						span.checkbox {
+							position: relative;
+							background-color: var(--highlight-1);
+							outline: var(--highlight-1) solid 1px;
+							outline-offset: 0.125rem;
+							border-radius: 100%;
+							width: 1.5rem;
+							height: 1.5rem;
+
+							> input {
+								position: absolute;
+								height: 1.5rem;
+								width: 1.5rem;
+								opacity: 0;
+								cursor: pointer;
+								z-index: 999;
+							}
+
+							svg.checkmark {
+								position: absolute;
+								color: #00ff00;
+								stroke-width: 1.5;
+								width: 1rem;
+								height: 1rem;
+								transform: translate(-50%, -50%);
+								top: 50%;
+								left: 50%;
+							}
+							svg.checkmark.pending {
+								color: #ffff00;
+							}
+						}
+					}
+				}
+
+				> span {
+					/* flex-shrink: 1;
         flex-basis: 0%;
         display: block; */
-        width: fit-content;
-        align-self: end;
-        display: flex;
-        gap: 0.5rem;
-        padding: 0 0.5rem;
+					width: fit-content;
+					align-self: end;
+					display: flex;
+					gap: 0.5rem;
+					padding: 0 0.5rem;
 
-        
+					> button {
+						background-color: transparent;
+						cursor: pointer;
 
-        > button {
+						color: var(--secondary-color);
+						> svg {
+							color: inherit;
+							stroke-width: 1.5;
+						}
+					}
+					> button:hover,
+					button:focus {
+						color: var(--highlight-1);
+					}
+				}
+			}
+		}
 
-          background-color: transparent;
-          cursor: pointer;
+		> article:hover,
+		article:focus {
+			label {
+				opacity: 1 !important;
+				color: var(--text-color);
+			}
+		}
+	}
+}
 
-          color: var(--secondary-color);
-          >svg {
-            color: inherit;
-            stroke-width: 1.5;
-          }
-        }
-        >button:hover, button:focus {
-          color:var(--highlight-1) ;
-        }
-      }
-    }
-    }
-
-    > article:hover, article:focus{
-    
-        label {
-          opacity: 1 !important;
-          color: var(--text-color);
-        }
-    }
-
-
-  }
-
-
- }
-
- div.modal-backdrop{
-
-  position: fixed;
-  inset:0;
-  /* height: 100svh;
+div.modal-backdrop {
+	position: fixed;
+	inset: 0;
+	/* height: 100svh;
   width: 100%; */
 
 
+	> div.overlay {
+		position: absolute;
+		inset: 0;
+		background-color: rgba(255, 255, 255, 0.1);
+
+		backdrop-filter: blur(1px);
+	}
+
+	> form {
+		position: absolute;
+		transform: translate(-50%, -50%);
+		top: 50%;
+		left: 50%;
+		/* margin: 0 auto; */
+    margin: 0 0.5rem;
+
+		max-width: 750px;
+		width: 100%;
+
+		background-color: var(--primary-color);
+
+		display: grid;
+		padding: 0.75rem;
+		gap: 1rem;
+		border-radius: 0.5rem;
+    
+
+    box-shadow: 2px 2px 4px black;
+
+		> span.actions {
+			button {
+				cursor: pointer;
+				padding: 0.5rem;
+				border-radius: 0.5rem;
+				background-color: var(--highlight-1);
+				color: var(--text-color);
+				font-family: "Barlow Semi Condensed";
+				/* font-size: 1rem; */
+				font-weight: bold;
+				text-transform: uppercase;
+				transition: all 0.16s ease-in;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.702);
+			}
+
+			button:hover,
+			button:focus {
+				background-color: var(--alt-color);
+			}
+		}
+
+		> fieldset {
+			display: grid;
+			gap: 0.5rem;
+			textarea {
+				padding: 0.6rem;
+				border-radius: 0.5rem;
+				font-size: 1.2rem;
+				line-height: 1.8rem;
+				font-family: "Barlow";
+
+				min-height: 10.2rem;
+				max-height: 10.2rem;
+
+				background-color: var(--secondary-color);
+			}
+			input[type="submit"] {
+				cursor: pointer;
+				border-radius: 0.5rem;
+				padding: 0.75rem;
+
+				background-color: var(--highlight-1);
+				color: var(--text-color);
+				font-size: 1.25rem;
+				font-family: "Barlow Condensed";
+				transition: all 0.16s ease-in;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.702);
+			}
+
+			input[type="submit"]:hover,
+			input[type="submit"]:focus {
+				background-color: var(--alt-color);
+			}
+		}
+	}
+}
+
+body:has(div.modal-backdrop) {
+	/* overflow: clip; */
+	/* height: 100svh; */
+}
 
 
-  
-  > div.overlay {
-    position: absolute;
-    inset: 0;
-    background-color: rgba(255, 255, 255, 0.1);
-  
-    backdrop-filter: blur(1px);
-
-  }
-
-  
-
-  > form {
-    position: absolute;
-    transform: translate(-50%,-50%);
-    top: 50%;
-    left:50%;
-    margin:  0 auto;
-
-    width: 750px;
-
-    background-color: var(--primary-color);
-
-    display: grid;
-    padding: 0.75rem;
-    gap: 1rem;
-    border-radius: 0.5rem;
-
-    >span.actions {
-
-      button {
-        cursor:pointer;
-        padding: 0.5rem;
-        border-radius: 0.5rem;
-        background-color: var(--highlight-1);
-        color:var(--text-color);
-        font-family: "Barlow Semi Condensed";
-        /* font-size: 1rem; */
-        font-weight: bold;
-        text-transform: uppercase;
-        transition: all 0.16s ease-in;
-      }
-
-      button:hover,button:focus{
-        background-color: var(--alt-color);
+@media screen and (max-width: 768px) {
+  main.app {
+    
+    >header {
+      h1 {
+        font-size: 2.5rem;
+        line-height: 3.75rem;
       }
     }
-
-    >fieldset {
-      display: grid;
-      gap: 0.5rem;
-      textarea{
-        padding: 0.6rem;
-        border-radius: 0.5rem;
-        font-size: 1.2rem;
-        line-height: 1.8rem;
-        font-family: "Barlow";
-
-        min-height:10.2rem ;
-        max-height: 10.2rem;
-
-        background-color: var(--secondary-color);
-
-      }
-      input[type="submit"] {
-        cursor: pointer;
-        border-radius: 0.5rem;
-        padding: 0.75rem;
-
-        background-color: var(--highlight-1);
-        color: var(--text-color);
-        font-size: 1.25rem;
-        font-family: "Barlow Condensed";
-        transition: all 0.16s ease-in;
-      }
-
-      input[type="submit"]:hover,input[type="submit"]:focus{
-        background-color: var(--alt-color);
-      }
-    }
-
-
   }
- }
-
-
- body:has(div.modal-backdrop) {
-  /* overflow: clip; */
-  /* height: 100svh; */
- }
+  
+}
