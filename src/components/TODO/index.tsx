@@ -17,8 +17,8 @@ function NewTodo({
 	return (
 		<article key={TODO.id} tabIndex={0}>
 			<pre>{TODO.TODOCONTENT}</pre>
-			<span>
-				<span>
+			<span className="toolbox">
+				<span className="status-checkbox-wrapper">
 					<p>
 						{idx + 1} / {TODOS_length}
 					</p>
@@ -39,7 +39,7 @@ function NewTodo({
 						<label htmlFor="status">{TODO.isCompleted ? "Task Completed" : "Task Pending"}</label>
 					</span>
 				</span>
-				<span>
+				<span className="actions">
 					<button className="delete" onClick={() => deleteTODO(TODO.id)}>
 						<Trash />
 					</button>

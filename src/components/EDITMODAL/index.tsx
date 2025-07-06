@@ -28,11 +28,6 @@ function EditTodoModal({ TODO, editTODO, setOpenEditModal }: EditTodoModalPropsi
 					setOpenEditModal(false);
 				}}
 			>
-				<span className="actions">
-					<button type="button" onClick={() => setOpenEditModal(false)}>
-						Cancelar
-					</button>
-				</span>
 
 				<fieldset>
 					<textarea
@@ -41,8 +36,13 @@ function EditTodoModal({ TODO, editTODO, setOpenEditModal }: EditTodoModalPropsi
 						value={TODOCONTENT}
 						onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setTODOCONTENT(e.target.value)}
 					></textarea>
-					<input type="submit" value="Salvar Edição" />
 				</fieldset>
+				<span className="actions">
+					<button type="button" onClick={() => setOpenEditModal(false)}>
+						Cancelar
+					</button>
+					<input type="submit" value="Salvar Edição" />
+				</span>
 			</form>
 		</div>
 	);
